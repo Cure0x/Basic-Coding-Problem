@@ -48,25 +48,36 @@ graph_Jarak ={
 #Karena dalam pencarian jalan kita akan mencari dan melakukan decisiion di yang paling akhir maka menggunakan data structure stack
 # Karena tidak boleh melewati jalan yang sama, maka stack akan menggunakan set
 
+def merge_unique(array1, array2):
+    merged = array1.copy()
+    for value in array2:
+        if value not in merged:
+            merged.append(value)
+    return merged
+
 def finding_Route (route, start, finish):
-    stack = []
-    distance = 0
+    answers, dists = [],[]
     node = start
-    if node != finish:
-        path = [node]
-        next_Nodes = list(route[node].keys())
-        print(f"path before update = {path}")
-        print(f"next node = {next_Nodes}")
-        stack += next_Nodes
-        next_Path = stack[-1]
-        distance = route[node][next_Path]
-        node = next_Path
-        path.append(node)
-        print(f"path after update = {path}")
-        print(f"Total Distance = {distance}")
-        print(f"All the stack after update = {stack}")
-        print(f"The node that we are now = {node}")
+    distance = 0
+    next_Nodes = list(route[node].keys())
+    stack = [next_Nodes]
+    path = [node]
+    
+    while len(stack) != 0 :
+        if node == finish:
+            answers.append(path)
+            dists.append(distance)
+            pass
+        else:
+            next_Nodes = list(route[node].keys())
+            stack = merge_unique(stack, next_Nodes)
+            next_Path = stack[-1]
+            distance += route[node][next_Path]
+            node = next_Path
+            path.append(node)
+    return answers, dists
 
-    pass
+answers , dists = finding_Route(graph_Jarak, 'A', 'E')
 
-finding_Route(graph_Jarak, 'A', 'E')
+for i in range(len(answers)):
+    print (f'''Path {i} = {answers[i]} dengan jarak {dists[i]}''')
