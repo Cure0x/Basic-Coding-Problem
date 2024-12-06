@@ -35,3 +35,12 @@ graph_Jarak ={
         "E":9
     }
 }
+
+# Define start dan akhir
+# Dari start, cek node apa aja selanjutnya
+# Cek salah satu node lalu cek node selanjutnya
+# Setiap pengecekan tidak boleh kembali ke node yang pernah dijalani
+# Cek apakah sudah bertemu node akhir atau belum
+# Jika belum bertemu coba lagi
+# Jika sudah bertemu dengan Node E, simpan semua node yang dilalui dan jumlah weight yang dilewati oleh perjalanan pencarian jalan tersebut ke dalam list (?)
+# Selanjutnya coba di percabangan sebelumnya yang belum dicek

@@ -1,24 +1,20 @@
 
+import time
+
 def bubble_Sort(lists):
     for _ in range (len(lists)-1):
         for i in range(len(lists)-1):
             if lists[i+1] < lists[i]:
-                temp = lists[i]
-                lists [i] = lists[i+1]
-                lists[i+1] = temp
+                lists [i], lists[i+1] = lists[i+1], lists[i]
     return lists
-
 
 def selection_Sort(lists):
     for j in range(len(lists)):
-        smallest_Value = lists[j]
-        for i,ang in enumerate(lists[j:]):
-            if ang < smallest_Value:
-                smallest_Value = ang
-                smallest_Index = i
-        temp = lists[j]
-        lists[j] = lists[smallest_Index]
-        lists[smallest_Index] = temp
+        smallest_Value = j
+        for i in range(j+1,len(lists)):
+            if lists[i] < lists[smallest_Value]:
+                smallest_Value = i
+        lists[j], lists[smallest_Value] = lists[smallest_Value], lists[j]
     return lists
 
 list_Nilai = [
@@ -32,16 +28,25 @@ list_Nilai = [
 ]
 
 used_Lists1 = list_Nilai.copy()
+start1 = time.time()
 ln_Bubbles = bubble_Sort(used_Lists1)
+end1 = time.time()
+time_Bubbles = (end1 - start1) * 10**3
 
 used_Lists2 = list_Nilai.copy()
+
+start2 = time.time()
 ln_Selects = selection_Sort(used_Lists2)
+end2 = time.time()
+time_Selects = (end2 - start2) * 10**3
 
 print("The Unsorted Lists")
 print(list_Nilai)
 
 print("\nThe Sorted Lists with Bubble Sorts")
 print(f"{ln_Bubbles}")
+print(f"Time execution for Bubble Sorts = {time_Bubbles} ms")
 
 print("\nThe Sorted Lists with Selection Sorts")
-print(f"\n{ln_Selects}")
+print(f"{ln_Selects}")
+print(f"Time execution for Selection Sorts = {time_Selects} ms")
